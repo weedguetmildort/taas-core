@@ -9,7 +9,6 @@
     <exclude-pattern>/build/*</exclude-pattern>
 
     <!-- Remove after implementing requires -->
-    <exclude-pattern>/includes/class-taas-logger.php</exclude-pattern>
 	<exclude-pattern>/includes/class-taas-db.php</exclude-pattern>
 
     <arg name="extensions" value="php"/>
@@ -18,6 +17,9 @@
 
     <rule ref="WordPress-Core"/>
     <rule ref="WordPress-Docs"/>
+    <rule ref="WordPress">
+        <exclude name="Squiz.Commenting.FunctionComment.ParamCommentFullStop"/>
+    </rule>
 
     <config name="minimum_supported_wp_version" value="6.0"/>
     <config name="testVersion" value="8.2-"/>
