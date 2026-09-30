@@ -64,7 +64,6 @@ class TAAS_Auth {
 		 * Override query-param, local dev only
 		 */
 		if ( self::is_local_dev() && isset( $_GET['taas_role'] ) ) {
-			// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			$requested = 'taas_' . sanitize_key( wp_unslash( $_GET['taas_role'] ) );
 			if ( in_array( $requested, $valid, true ) ) {
 				return $requested;
@@ -104,7 +103,7 @@ class TAAS_Auth {
 	/**
 	 * Extract the university identifier for a WordPress user
 	 *
-	 * @param WP_User $user WordPress user object.
+	 * @param WP_User $user WordPress user object
 	 * @return string University identifier, or '' if not resolvable
 	 */
 	private static function university_id_for( WP_User $user ): string {

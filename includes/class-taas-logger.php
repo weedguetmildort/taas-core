@@ -9,7 +9,6 @@ defined( 'ABSPATH' ) || exit;
 
 /**
  * Implement a thin wrapper over error_log()
- *
  */
 class TAAS_Logger {
 

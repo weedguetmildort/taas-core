@@ -8,18 +8,20 @@
     <exclude-pattern>/node_modules/*</exclude-pattern>
     <exclude-pattern>/build/*</exclude-pattern>
 
-    <!-- Remove after implementing requires -->
-	<exclude-pattern>/includes/class-taas-db.php</exclude-pattern>
-
     <arg name="extensions" value="php"/>
     <arg name="colors"/>
     <arg value="sp"/>
 
+    <rule ref="WordPress">
+        <!-- Allow param comments without ending punctuation -->
+        <exclude name="Squiz.Commenting.FunctionComment.ParamCommentFullStop"/>
+        <!-- Allow reading $_GET without a nonce check -->
+        <exclude name="WordPress.Security.NonceVerification.Recommended"/>
+        <!-- Allow error_log() for intentional debug logging -->
+        <exclude name="WordPress.PHP.DevelopmentFunctions.error_log_error_log"/>
+    </rule>
     <rule ref="WordPress-Core"/>
     <rule ref="WordPress-Docs"/>
-    <rule ref="WordPress">
-        <exclude name="Squiz.Commenting.FunctionComment.ParamCommentFullStop"/>
-    </rule>
 
     <config name="minimum_supported_wp_version" value="6.0"/>
     <config name="testVersion" value="8.2-"/>
