@@ -60,7 +60,9 @@ class TAAS_Auth {
 	public static function local_dev_role(): string {
 		$valid = array_keys( self::roles() );
 
-		// Override query-param, local dev only
+		/**
+		 * Override query-param, local dev only
+		 */
 		if ( self::is_local_dev() && isset( $_GET['taas_role'] ) ) {
 			// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			$requested = 'taas_' . sanitize_key( wp_unslash( $_GET['taas_role'] ) );
@@ -102,7 +104,6 @@ class TAAS_Auth {
 	/**
 	 * Extract the university identifier for a WordPress user
 	 *
-	 *
 	 * @param WP_User $user WordPress user object.
 	 * @return string University identifier, or '' if not resolvable.
 	 */
@@ -135,7 +136,6 @@ class TAAS_Auth {
 
 	/**
 	 * Return the TAAS role for a user, or '' if they have none
-	 *
 	 *
 	 * @param WP_User $user WordPress user object.
 	 * @return string
