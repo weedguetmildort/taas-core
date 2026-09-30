@@ -30,13 +30,13 @@ class TAAS_DB {
 	/**
 	 * Build a fully prefixed table name
 	 *
-	 * @param string $namespace One of the NS_* constants
-	 * @param string $table     Bare table name, e.g. 'applications'
+	 * @param string $name One of the NS_* constants
+	 * @param string $table Bare table name, e.g. 'applications'
 	 * @return string Fully qualified table name, e.g. 'wp_taas_onb_applications'
 	 */
-	public static function table( string $namespace, string $table ): string {
+	public static function table( string $name, string $table ): string {
 		global $wpdb;
-		return $wpdb->prefix . $namespace . $table;
+		return $wpdb->prefix . $name . $table;
 	}
 
 	/**
@@ -79,7 +79,7 @@ class TAAS_DB {
 		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
 
 		$statements = is_array( $sql ) ? $sql : array( $sql );
-		$results    = array();
+		$results = array();
 
 		foreach ( $statements as $statement ) {
 			$results[] = dbDelta( $statement );
@@ -104,7 +104,7 @@ class TAAS_DB {
 	 * Stores the schema version for a component
 	 *
 	 * @param string $component Short component key
-	 * @param string $version   Version string
+	 * @param string $version Version string
 	 * @return void
 	 */
 	public static function set_schema_version( string $component, string $version ): void {
@@ -115,7 +115,7 @@ class TAAS_DB {
 	 * Whether a stored schema is older than the given version
 	 *
 	 * @param string $component Short component key
-	 * @param string $version   Version to compare against
+	 * @param string $version Version to compare against
 	 * @return bool True if a migration is needed
 	 */
 	public static function needs_upgrade( string $component, string $version ): bool {
