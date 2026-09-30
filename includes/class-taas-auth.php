@@ -137,7 +137,7 @@ class TAAS_Auth {
 	/**
 	 * Return the TAAS role for a user, or '' if they have none
 	 *
-	 * @param WP_User $user WordPress user object
+	 * @param WP_User $user WordPress user object.
 	 * @return string
 	 */
 	private static function taas_role_for( WP_User $user ): string {
@@ -180,7 +180,7 @@ class TAAS_Auth {
 	/**
 	 * Check if the current user holds the given TAAS role
 	 *
-	 * @param string $role One of the ROLE_* constants
+	 * @param string $role One of the ROLE_* constants.
 	 * @return bool
 	 */
 	public static function has_role( string $role ): bool {
@@ -200,7 +200,7 @@ class TAAS_Auth {
 	/**
 	 * Return a REST permission callback that requires a given role
 	 *
-	 * @param string $role One of the ROLE_* constants
+	 * @param string $role One of the ROLE_* constants.
 	 * @return callable
 	 */
 	public static function require_role( string $role ): callable {
