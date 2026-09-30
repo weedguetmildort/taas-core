@@ -12,7 +12,7 @@ use PHPUnit\Framework\TestCase;
  */
 class SanityTest extends TestCase {
 
-	/** 
+	/**
 	 * Confirm the test runner is wired up
 	 */
 	public function test_phpunit_is_running(): void {
