@@ -19,6 +19,8 @@
         <exclude name="WordPress.Security.NonceVerification.Recommended"/>
         <!-- Allow error_log() for intentional debug logging -->
         <exclude name="WordPress.PHP.DevelopmentFunctions.error_log_error_log"/>
+        <!-- Allow normal aligment -->
+        <exclude name="Generic.Formatting.MultipleStatementAlignment"/>
     </rule>
     <rule ref="WordPress-Core"/>
     <rule ref="WordPress-Docs"/>
