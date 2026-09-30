@@ -1,10 +1,20 @@
 <?php
+/**
+ * Sanity test for the CI pipeline
+ *
+ * @package TaaS_Core
+ */
+
 use PHPUnit\Framework\TestCase;
 
-// Check sanity, CI Placeholder test before real tests exist
+/**
+ * Check sanity
+ */
 class SanityTest extends TestCase {
 
-	//Confirms the test runner is wired up.
+	/** 
+	 * Confirm the test runner is wired up
+	 */
 	public function test_phpunit_is_running(): void {
 		$this->assertTrue( true );
 	}
