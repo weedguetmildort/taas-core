@@ -55,7 +55,7 @@ class TAAS_Auth {
 	/**
 	 * Determine role of the mock user in local dev
 	 *
-	 * @return string One of the ROLE_* constants.
+	 * @return string One of the ROLE_* constants
 	 */
 	public static function local_dev_role(): string {
 		$valid = array_keys( self::roles() );
@@ -105,7 +105,7 @@ class TAAS_Auth {
 	 * Extract the university identifier for a WordPress user
 	 *
 	 * @param WP_User $user WordPress user object.
-	 * @return string University identifier, or '' if not resolvable.
+	 * @return string University identifier, or '' if not resolvable
 	 */
 	private static function university_id_for( WP_User $user ): string {
 		/**
@@ -137,7 +137,7 @@ class TAAS_Auth {
 	/**
 	 * Return the TAAS role for a user, or '' if they have none
 	 *
-	 * @param WP_User $user WordPress user object.
+	 * @param WP_User $user WordPress user object
 	 * @return string
 	 */
 	private static function taas_role_for( WP_User $user ): string {
@@ -200,7 +200,7 @@ class TAAS_Auth {
 	/**
 	 * Return a REST permission callback that requires a given role
 	 *
-	 * @param string $role One of the ROLE_* constants.
+	 * @param string $role One of the ROLE_* constants
 	 * @return callable
 	 */
 	public static function require_role( string $role ): callable {
