@@ -9,11 +9,11 @@ on:
 jobs:
   test:
     name: Lint/Test
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
 
     steps:
       - name: Check out the repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up PHP 8.2
         uses: shivammathur/setup-php@v2
@@ -29,7 +29,7 @@ jobs:
         run: php bin/check-version.php
 
       - name: Cache Composer packages
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: vendor
           key: ${{ runner.os }}-php82-${{ hashFiles('**/composer.lock') }}
