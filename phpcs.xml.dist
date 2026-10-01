@@ -24,6 +24,13 @@
     </rule>
     <rule ref="WordPress-Core"/>
     <rule ref="WordPress-Docs"/>
+    <!-- Allow raw file reads and error_log() in the version class -->
+    <rule ref="WordPress.PHP.DevelopmentFunctions">
+	    <exclude-pattern>/includes/class-taas-version.php</exclude-pattern>
+    </rule>
+    <rule ref="WordPress.WP.AlternativeFunctions">
+	    <exclude-pattern>/includes/class-taas-version.php</exclude-pattern>
+    </rule>
 
     <config name="minimum_supported_wp_version" value="6.0"/>
     <config name="testVersion" value="8.2-"/>
