@@ -36,8 +36,10 @@ require_once TAAS_CORE_PATH . 'includes/class-taas-auth.php';
  */
 function taas_core_activate(): void {
 	global $wpdb;
- 
-	// Guard MySQL plugin header field
+
+	/**
+	 * Guard MySQL plugin header field
+	 */
 	if ( version_compare( $wpdb->db_version(), '8.0', '<' ) ) {
 		deactivate_plugins( plugin_basename( __FILE__ ) );
 		wp_die(
