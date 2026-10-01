@@ -8,7 +8,7 @@
 $plugin_file = dirname( __DIR__ ) . '/taas-core.php';
 $version_file = dirname( __DIR__ ) . '/includes/class-taas-version.php';
 
-$errors = array();
+$version_errors = array();
 
 $plugin_src  = (string) file_get_contents( $plugin_file );
 $version_src = (string) file_get_contents( $version_file );
@@ -27,53 +27,53 @@ foreach ( array( 'CONTRACT', 'WP_MAJOR', 'PHP_MAJOR', 'MYSQL_MAJOR', 'APACHE_MAJ
 	if ( preg_match( '/const\s+' . $name . '\s*=\s*(\d+)\s*;/', $version_src, $m ) ) {
 		$segments[] = $m[1];
 	} else {
-		$errors[] = "Could not read TAAS_Version::{$name}.";
+		$version_errors[] = "Could not read TAAS_Version::{$name}.";
 	}
 }
 $class_tag = implode( '.', $segments );
 
 if ( '' === $header_version ) {
-	$errors[] = 'Could not read Version from the plugin header.';
+	$version_errors[] = 'Could not read Version from the plugin header.';
 }
 
 if ( '' === $constant_version ) {
-	$errors[] = 'Could not read TAAS_CORE_VERSION.';
+	$version_errors[] = 'Could not read TAAS_CORE_VERSION.';
 }
 
 if ( $header_version !== $constant_version ) {
-	$errors[] = "Header version ({$header_version}) does not match TAAS_CORE_VERSION ({$constant_version}).";
+	$version_errors[] = "Header version ({$header_version}) does not match TAAS_CORE_VERSION ({$constant_version}).";
 }
 
 // Rewrite committed build segment in CI at release to 0
 $parts = explode( '.', $header_version );
 
 if ( 6 !== count( $parts ) ) {
-	$errors[] = "Version must have 6 segments (CONTRACT.WP.PHP.MYSQL.APACHE.BUILD), got {$header_version}.";
+	$version_errors[] = "Version must have 6 segments (CONTRACT.WP.PHP.MYSQL.APACHE.BUILD), got {$header_version}.";
 } else {
 	if ( '0' !== $parts[5] ) {
-		$errors[] = "Committed build segment must be 0, got {$parts[5]}. Do not hand-edit the build number.";
+		$version_errors[] = "Committed build segment must be 0, got {$parts[5]}. Do not hand-edit the build number.";
 	}
 
 	$header_tag = implode( '.', array_slice( $parts, 0, 5 ) );
 
 	if ( $header_tag !== $class_tag ) {
-		$errors[] = "Header baseline ({$header_tag}) does not match TAAS_Version constants ({$class_tag}).";
+		$version_errors[] = "Header baseline ({$header_tag}) does not match TAAS_Version constants ({$class_tag}).";
 	}
 }
 
 // Compare against a git tag passed as argv[1]
 if ( isset( $argv[1] ) && '' !== $argv[1] ) {
-	$tag = ltrim( $argv[1], 'v' );
+	$release_tag = ltrim( $argv[1], 'v' );
 
-	if ( $tag !== $class_tag ) {
-		$errors[] = "Git tag ({$tag}) does not match the version baseline ({$class_tag}). Tags carry the 5 baseline segments only; the build is appended by CI.";
+	if ( $release_tag !== $class_tag ) {
+		$version_errors[] = "Git tag ({$release_tag}) does not match the version baseline ({$class_tag}). Tags carry the 5 baseline segments only; the build is appended by CI.";
 	}
 }
 
-if ( ! empty( $errors ) ) {
+if ( ! empty( $version_errors ) ) {
 	fwrite( STDERR, "Version check failed:\n" );
-	foreach ( $errors as $error ) {
-		fwrite( STDERR, "  - {$error}\n" );
+	foreach ( $version_errors as $version_error ) {
+		fwrite( STDERR, "  - {$version_error}\n" );
 	}
 	exit( 1 );
 }

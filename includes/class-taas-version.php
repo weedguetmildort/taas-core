@@ -133,7 +133,7 @@ class TAAS_Version {
 			}
 		}
 
-		if ( ! empty( $live['sapi'] ) && self::BASELINE['sapi'] !==  $live['sapi'] ) {
+		if ( ! empty( $live['sapi'] ) && self::BASELINE['sapi'] !== $live['sapi'] ) {
 			$minor_drift['sapi'] = sprintf(
 				'baseline %s, running %s',
 				self::BASELINE['sapi'],
